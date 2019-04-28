@@ -1,0 +1,32 @@
+var ctx = document.getElementById('tempChart');
+var myChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+        labels: [
+        {% for label in labels %}
+          "{{ label }}",
+          {% endfor %}
+        ],
+        datasets: [{
+            label: 'Temperature (°C)',
+            data: [
+              {% for value in values %}
+                "{{ value }}",
+                {% endfor %}
+            ],
+            borderWidth: 2,
+            fill: false,
+            lineTension: 0.3,
+            borderColor: 'red'
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: false
+                }
+            }]
+        }
+    }
+});

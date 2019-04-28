@@ -34,4 +34,26 @@ def index():
         """
     ).fetchone()
 
-    return render_template('index.html', last_reading=last_reading)
+    all_readings = db.execute(
+        """
+        SELECT read_datetime, temperature
+        FROM temperatures;
+        """
+    ).fetchall()
+
+    labels = []
+    values = []
+
+    for reading in all_readings:
+        labels.append(reading['read_datetime'])
+        values.append(reading['temperature'])
+
+
+    # labels = ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange']
+    # values = [19, 19, 3, 5, 2, 3]
+
+    return render_template(
+        'index.html',
+        last_reading=last_reading,
+        labels=labels,
+        values=values)
