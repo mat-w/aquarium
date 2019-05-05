@@ -1,4 +1,4 @@
-var ctx = document.getElementById('tempChart');
+var ctx = document.getElementById('temperature-chart');
 var myChart = new Chart(ctx, {
     type: 'line',
     data: {
@@ -21,6 +21,7 @@ var myChart = new Chart(ctx, {
         }]
     },
     options: {
+        maintainAspectRatio: false,
         scales: {
             yAxes: [{
                 ticks: {

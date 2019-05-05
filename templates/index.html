@@ -2,20 +2,22 @@
 <html lang="en">
   <head>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}" />
-
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0/dist/Chart.min.js"></script>
-
     <title>Aquarium</title>
   </head>
 
   <body>
-    <p>{{ last_reading.temperature|round }}°C at {{ last_reading.read_datetime.strftime('%H:%M %d-%m-%Y') }}</p>
-    <div>
-      <canvas id="tempChart" width="600" height="400"></canvas>
+  <div class="container">
+    <p class="panel left-panel">{{ last_reading.temperature|round }}°C at {{ last_reading.read_datetime.strftime('%H:%M %d-%m-%Y') }}</p>
+    <p class="panel center-panel">{{ last_reading.temperature|round }}°C at {{ last_reading.read_datetime.strftime('%H:%M %d-%m-%Y') }}</p>
+    <p class="panel right-panel">{{ last_reading.temperature|round }}°C at {{ last_reading.read_datetime.strftime('%H:%M %d-%m-%Y') }}</p>
+    <div class="chart-container panel full-panel">
+      <canvas id="temperature-chart"></canvas>
         <script type="text/javascript">
           {% include "temperature_chart.html" %}
         </script>
     </div>
+  </div>
 
   </body>
 
