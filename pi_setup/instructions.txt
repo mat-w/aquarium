@@ -1,0 +1,5 @@
+## add read_temperature.py cron job
+## command below will add reading every minute.
+
+crontab -e
+* * * * * python read_temperature.py
