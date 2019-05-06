@@ -41,5 +41,5 @@ def write_to_db(temperature):
 
 if __name__ == '__main__':
     t = read_temp()
-    with app.app.context():
+    with app.app_context():
         write_to_db(t)
