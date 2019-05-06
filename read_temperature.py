@@ -4,6 +4,8 @@ import time
 import datetime
 import sqlite3
 
+from main import app, get_db
+
 os.system('modprobe w1-gpio')
 os.system('modprobe w1-therm')
 
@@ -29,7 +31,7 @@ def read_temp():
         return temp_c
 
 def write_to_db(temperature):
-    db = sqlite3.connect('data', detect_types = sqlite3.PARSE_DECLTYPES)
+    db = get_db()
     db.execute(
     """
     INSERT INTO temperatures (read_datetime, temperature)
@@ -39,4 +41,5 @@ def write_to_db(temperature):
 
 if __name__ == '__main__':
     t = read_temp()
-    write_to_db(t)
+    with app.app.context():
+        write_to_db(t)

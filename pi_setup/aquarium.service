@@ -1,0 +1,13 @@
+[Unit]
+Description=Gunicorn instance to serve aquarium
+After=network.target
+
+[Service]
+User=pi
+Group=www-data
+WorkingDirectory=/home/pi/aquarium
+Environment="PATH=/home/pi/aquarium/venv/bin"
+ExecStart=/home/pi/aquarium/venv/bin/gunicorn --workers 3 --bind unix:aquarium.sock -m 007 wsgi:app
+
+[Install]
+WantedBy=multi-user.target

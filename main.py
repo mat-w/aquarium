@@ -57,3 +57,6 @@ def index():
         last_reading=last_reading,
         labels=labels,
         values=values)
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0')

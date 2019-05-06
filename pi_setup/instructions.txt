@@ -1,5 +1,35 @@
-## add read_temperature.py cron job
-## command below will add reading every minute.
+## initial setup
+sudo apt-get install git python3-venv nginx
 
+## add read_temperature.py cron job
+## command below will add reading every 5 minutes.
 crontab -e
-* * * * * python read_temperature.py
+*/5 * * * * python aquarium/read_temperature.py
+
+## check nginx working by nagivating to rpi's ip
+
+## clone repo
+git clone https://github.com/mat-w/aquarium.git aquarium
+
+## Create and activate virtual env
+cd aquarium
+python3 -m venv venv
+source venv/bin/activate
+
+## Install flask and gunicorn
+pip install flask gunicorn
+
+## Create gunicorn service
+sudo cp pi_setup aquarium.service /etc/systemd/system/aquarium.service
+
+
+## Set nginx settings
+
+sudo ln -s /etc/nginx/sites-available/aquarium /etc/nginx/sites-enabled
+
+## test settings with
+sudo nginx -t
+
+## References
+https://www.digitalocean.com/community/tutorials/how-to-serve-flask-applications-with-gunicorn-and-nginx-on-ubuntu-18-04
+http://docs.gunicorn.org/en/stable/deploy.html
