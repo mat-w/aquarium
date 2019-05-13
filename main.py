@@ -36,8 +36,9 @@ def index():
 
     all_readings = db.execute(
         """
-        SELECT read_datetime, temperature
-        FROM temperatures;
+        SELECT strftime ('%d %H',read_datetime) as read_datetime, round(avg(temperature),1) as temperature
+        FROM temperatures where read_datetime >= datetime('now', '-1 day')
+        GROUP BY strftime ('%d %H',read_datetime);
         """
     ).fetchall()
 
@@ -45,7 +46,7 @@ def index():
     values = []
 
     for reading in all_readings:
-        labels.append(reading['read_datetime'])
+        labels.append(reading['read_datetime'][-2:])
         values.append(reading['temperature'])
 
 
