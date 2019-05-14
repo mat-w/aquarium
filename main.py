@@ -42,6 +42,31 @@ def index():
         """
     ).fetchall()
 
+    minimum = db.execute(
+        """
+        SELECT read_datetime, round(min(temperature), 1) as temperature
+        FROM temperatures where read_datetime >= datetime('now', '-1 day');
+        """
+    ).fetchone()
+
+    maximum = db.execute(
+        """
+        SELECT read_datetime, round(max(temperature), 1) as temperature
+        FROM temperatures where read_datetime >= datetime('now', '-1 day');
+        """
+    ).fetchone()
+
+    average = db.execute(
+        """
+        SELECT read_datetime, round(avg(temperature), 1) as temperature
+        FROM temperatures where read_datetime >= datetime('now', '-1 day');
+        """
+    ).fetchone()
+
+    print(minimum['temperature'])
+    print(maximum['temperature'])
+    print(average['temperature'])
+
     labels = []
     values = []
 
@@ -55,7 +80,9 @@ def index():
 
     return render_template(
         'index.html',
-        last_reading=last_reading,
+        minimum=minimum,
+        maximum=maximum,
+        average=average,
         labels=labels,
         values=values)
 

@@ -8,9 +8,9 @@
 
   <body>
   <div class="container">
-    <p class="panel left-panel">{{ last_reading.temperature|round }}°C at {{ last_reading.read_datetime.strftime('%H:%M %d-%m-%Y') }}</p>
-    <p class="panel center-panel">{{ last_reading.temperature|round }}°C at {{ last_reading.read_datetime.strftime('%H:%M %d-%m-%Y') }}</p>
-    <p class="panel right-panel">{{ last_reading.temperature|round }}°C at {{ last_reading.read_datetime.strftime('%H:%M %d-%m-%Y') }}</p>
+    <p class="panel left-panel"> 24h min {{ minimum.temperature }}°C at {{ minimum.read_datetime.strftime('%H:%M %d-%m-%Y') }}</p>
+    <p class="panel center-panel">24h avg {{ average.temperature }}°C at {{ average.read_datetime.strftime('%H:%M %d-%m-%Y') }}</p>
+    <p class="panel right-panel">24h max {{ maximum.temperature }}°C at {{ maximum.read_datetime.strftime('%H:%M %d-%m-%Y') }}</p>
     <div class="chart-container panel full-panel">
       <canvas id="temperature-chart"></canvas>
         <script type="text/javascript">
